@@ -9,12 +9,10 @@ function App() {
   return (
     <div className="App">
       <Navbar />
-      <BrowserRouter>
-        <Routes>
-          <Route path='/' element={<Search/>}/>
-          <Route path='/favorites' element={<Favorites/>}/>
-        </Routes>
-      </BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Search />} />
+        <Route path='/favorites' element={<Favorites />} />
+      </Routes>
     </div>
   );
 }
