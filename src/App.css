@@ -1,0 +1,21 @@
+.navbar{
+    height: 70px;
+    width: 100%;
+    display: flex;
+}
+.navbar-list{
+    margin-left: auto;
+    display: flex;
+    flex-direction: row;
+    color: white;
+    background-color: black;
+    align-items: center;
+}
+.navbar-list--item{
+    padding: 10px;
+    cursor: pointer;
+}
+.search-btn{
+    border: 2px solid white;
+    border-radius: 10px;
+}

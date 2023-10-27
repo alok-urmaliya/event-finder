@@ -1,9 +1,10 @@
 import React from 'react'
+import '../styles/Search.css'
 
 const Search = () => {
     return (
-        <div className="search">
-            This is search page
+        <div className="search-page">
+            <h1>This is search page</h1>
         </div>
     )
 }
