@@ -1,0 +1,93 @@
+.search-form{
+    width: 500px;
+    height: 400px;
+    border-radius: 15px;
+    background: #444343;
+    opacity: 0.7;
+    border-radius: 15px;
+}
+
+.search-form--title{
+    padding: 10px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-form-container{
+    display: grid;
+    grid-template: 70px 70px / 1fr 1fr;
+    margin: 30px;
+}
+
+.label{
+    font-family: 'Times New Roman', Times, serif;
+    color: #86e1ff;
+    margin-left: 5px;
+}
+
+.search-form--keyword{
+    grid-column: 1 / -1;
+}
+
+.search-form--keyword--text{
+    width: 100%;
+    margin: 5px;
+    height: 30px;
+    border-radius: 5px;
+}
+
+.search-form--distance--text{
+    width: 90%;
+    margin: 5px;
+    height: 30px;
+    border-radius: 5px;
+}
+
+.search-form--category--select{
+    width: 100%;
+    margin: 5px;
+    height: 30px;
+    border-radius: 5px;
+}
+
+.search-form--location{
+    grid-column: 1 / -1;
+}
+
+.search-form--location--text{
+    width: 100%;
+    margin: 5px;
+    height: 30px;
+    border-radius: 5px;
+}
+
+.search-form--autolocation--checkbox{
+    margin: 5px;
+    color: white;
+}
+
+.search-form--buttons{
+    grid-column: 1 / -1;
+    margin:10px;
+    display: flex;
+    justify-content: center;
+}
+
+button{
+    width: 60px;
+    height: 30px;
+    margin:5px;
+    border: 2px solid black;
+    border-radius: 5px;
+    color: white;
+}
+
+.search-form--submit{
+    background-color: red;
+}
+
+.search-form--clear{
+    background-color: blue;
+}
