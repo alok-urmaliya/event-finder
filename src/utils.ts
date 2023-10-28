@@ -1,3 +1,12 @@
+enum Category {
+    Music = "KZFzniwnSyZfZ7v7nJ",
+    Sports = "KZFzniwnSyZfZ7v7nE",
+    ArtsTheatre = "KZFzniwnSyZfZ7v7na",
+    Film = "KZFzniwnSyZfZ7v7nn",
+    Miscellaneous = "KZFzniwnSyZfZ7v7n1",
+    Default = ""
+}
+
 class FormData {
     keyword: string
     distance: string
@@ -25,7 +34,44 @@ class Location {
     }
 }
 
+class EventPayload {
+    keyword: string
+    category: string
+    distance: string
+    latitude: string
+    longitude: string
+    
+    constructor(keyword:string ,category:string ,distance:string ,latitude:string ,longitude:string)
+    {
+        this.keyword = keyword
+        this.category = category
+        this.distance = distance
+        this.latitude = latitude
+        this.longitude = longitude
+    }
+}
+
+class EventData {
+    date : string
+    icon : string
+    event : string
+    genre : string
+    venue : string
+
+    constructor(date : string, icon : string, event : string, genre : string, venue : string)
+    {
+        this.date = date
+        this.icon = icon
+        this.event = event
+        this.genre = genre
+        this.venue = venue
+    }
+}
+
 export {
     FormData,
-    Location
+    Location,
+    EventPayload,
+    Category,
+    EventData
 }

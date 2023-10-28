@@ -1,28 +1,23 @@
 import React from 'react'
 import '../styles/SearchForm.css'
-import EventHelper from '../EventHelper';
-import EventService from '../EventService';
-import { FormData } from '../utils';
+import EventHelper from '../helpers/EventHelper';
+import { FormData, Category } from '../utils';
 
-const SearchForm = () => {
-    enum Category {
-        Music = "KZFzniwnSyZfZ7v7nJ",
-        Sports = "KZFzniwnSyZfZ7v7nE",
-        ArtsTheatre = "KZFzniwnSyZfZ7v7na",
-        Film = "KZFzniwnSyZfZ7v7nn",
-        Miscellaneous = "KZFzniwnSyZfZ7v7n1",
-        Default = ""
-    }
+const SearchForm = (props: any) => {
+    const [formData, setFormData] = React.useState(
+        new FormData(
+            "",
+            "",
+            Category.Default,
+            "",
+            false
+        )
+    )
 
-    const [formData, setFormData] = React.useState(new FormData("", "", Category.Default, "", false))
-
-    function handleSubmit(event: any) {
+    async function handleSubmit(event: any) {
         event.preventDefault();
-        console.log("submit request!")
-        const payload: any = EventHelper.getEventRequestPayload(formData);
-
-        //This is our action for now
-        console.log(formData)
+        const payload: any = await EventHelper.getEventRequestPayload(formData);
+        props.setPayload(payload)
     }
 
     function handleChange(event: any) {

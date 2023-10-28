@@ -1,6 +1,6 @@
 import React from 'react'
 
-const EventsList = () => {
+const EventsGrid = () => {
     const eventsList: Array<{
         Date: string;
         Icon: string;
@@ -52,4 +52,4 @@ const EventsList = () => {
     )
 }
 
-export default EventsList;
+export default EventsGrid;
