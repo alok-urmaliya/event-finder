@@ -3,6 +3,7 @@
     height: calc(100vh-70px);
     display: flex;
     flex-direction: column;
+    gap: 20px;
     align-items: center;
     justify-content: center;
 }

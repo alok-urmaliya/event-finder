@@ -1,53 +1,34 @@
 import React from 'react'
+import '../styles/EventsGrid.css'
+import GridElement from './GridElement'
+import icon from './logo192.png'
+import { EventData } from '../utils'
 
-const EventsGrid = () => {
-    const eventsList: Array<{
-        Date: string;
-        Icon: string;
-        Event: string;
-        Genre: string;
-        Venue: string;
-    }> = [
-            {
-                Date: "2023-11-01",
-                Icon: "music",
-                Event: "Concert 1",
-                Genre: "Rock",
-                Venue: "Rock Arena",
-            },
-            {
-                Date: "2023-11-05",
-                Icon: "sports",
-                Event: "Sports Event 1",
-                Genre: "Sports",
-                Venue: "Sports Stadium",
-            },
-            {
-                Date: "2023-11-10",
-                Icon: "movie",
-                Event: "Movie Night",
-                Genre: "Cinema",
-                Venue: "Cineplex Theater",
-            },
-            {
-                Date: "2023-11-15",
-                Icon: "music",
-                Event: "Concert 2",
-                Genre: "Pop",
-                Venue: "Pop Concert Hall",
-            },
-            {
-                Date: "2023-11-20",
-                Icon: "theatre",
-                Event: "Theater Play",
-                Genre: "Drama",
-                Venue: "Drama Theater",
-            },
-        ];
+const EventsGrid = (props: any) => {
+    const [eventsList, setEventsList] = React.useState<EventData[]>(props.gridData)
+
+    React.useEffect(() => {
+        setEventsList(props.gridData)
+        console.log('eventsList is here from down the component')
+        console.log(eventsList)
+    }, props.gridData)
+
+    function handleClick() {
+
+    }
+
+    const gridElements = eventsList.map((item: any) => <GridElement data={item} onClick={handleClick} />)
 
     return (
-        < div className="events-list--container" >
-            this is the removeEventListener
+        <div className="events-grid--container" >
+            <div className="events-grid--headers">
+                <h5 className="events-grid--heading">Date/Time</h5>
+                <h5 className="events-grid--heading">Icon</h5>
+                <h5 className="events-grid--heading">Event</h5>
+                <h5 className="events-grid--heading">Genre</h5>
+                <h5 className="events-grid--heading">Venue</h5>
+            </div>
+            {gridElements}
         </div >
     )
 }

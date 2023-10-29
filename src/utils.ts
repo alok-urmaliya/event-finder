@@ -52,14 +52,16 @@ class EventPayload {
 }
 
 class EventData {
+    id : string
     date : string
     icon : string
     event : string
     genre : string
     venue : string
 
-    constructor(date : string, icon : string, event : string, genre : string, venue : string)
+    constructor(id : string,date : string, icon : string, event : string, genre : string, venue : string)
     {
+        this.id = id
         this.date = date
         this.icon = icon
         this.event = event
