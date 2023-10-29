@@ -70,10 +70,64 @@ class EventData {
     }
 }
 
+class Venue {
+    name : string | null
+    address : string | null
+    phonenumber : string | null
+    openhours : string | null
+    generalrule : string | null
+    childrule : string | null
+
+    constructor(name:string|null, address : string|null, phonenumber : string|null, openhours : string|null, generalrule : string|null, childrule : string|null)
+    {
+        this.name = name
+        this.address = address
+        this.phonenumber = phonenumber
+        this.openhours = openhours
+        this.generalrule = generalrule
+        this.childrule = childrule
+    }
+}
+
+class EventDetail {
+    name:string|null
+    date:string | null
+    artists:string | null
+    venue:string | null
+    genre:string | null
+    priceranges:string | null
+    ticketstatus:string | null
+    buyticketlink:string | null
+    seatmapimgurl:string | null
+    venueData:Venue | null
+
+    constructor( name:string|null,date:string|null, artists:string|null, venue:string|null, genre:string|null, priceranges:string|null, ticketstatus:string|null, buyticketlink:string|null, seatmapimgurl:string|null, eventname:string|null,address:string|null ,phonenumber:string|null ,openhours:string|null ,generalrule:string|null ,childrule:string|null){
+        this.name = name
+        this.date = date
+        this.artists = artists
+        this.venue = venue
+        this.genre = genre
+        this.priceranges = priceranges
+        this.ticketstatus = ticketstatus
+        this.buyticketlink = buyticketlink
+        this.seatmapimgurl = seatmapimgurl
+        this.venueData = new Venue(
+            eventname,
+            address,
+            phonenumber,
+            openhours,
+            generalrule,
+            childrule
+        )
+    }
+}
+
 export {
     FormData,
     Location,
     EventPayload,
     Category,
-    EventData
+    EventData,
+    Venue,
+    EventDetail
 }
