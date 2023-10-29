@@ -12,12 +12,9 @@ const Search = () => {
     const [gridVisible, setGridVisible] = React.useState(false)
     const [parsedJson, setParsedJson] = React.useState<any[]>([])
 
-
-    console.log('Grid Data')
-    console.log(gridData)
-
     useEffect(() => {
         (async () => {
+            console.log(requestPayload)
             const response = requestPayload.latitude != '' ? await axios.get('http://127.0.0.1:8000/events', {
                 params: {
                     "keyword": requestPayload.keyword,
@@ -28,18 +25,7 @@ const Search = () => {
                 }
             }).then(res => res.data)
                 .then((res: any) => setParsedJson(res)) : null
-            console.log('this is json response')
-            console.log(response)
 
-            if (parsedJson.length > 0) {
-                console.log(parsedJson)
-                console.log(parsedJson[0].id)
-                console.log(parsedJson[0].dates.start.localDate + ' ' + parsedJson[0].dates.start.localTime)
-                console.log(parsedJson[0].images[0].url)
-                console.log(parsedJson[0].name)
-                console.log(parsedJson[0].classifications.length > 0 ? parsedJson[0].classifications[0].segment.name : '')
-                console.log(parsedJson[0]._embedded.venues[0].name)
-            }
             let list: EventData[] = [];
             list = parsedJson.map((item: any) => {
                 return (
@@ -54,8 +40,6 @@ const Search = () => {
                 )
             })
             setGridData(list ?? null)
-            console.log('we initialized gridData:')
-            console.log(gridData)
         })()
     }, [requestPayload])
 

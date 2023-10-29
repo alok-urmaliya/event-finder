@@ -6,19 +6,18 @@ import { EventData } from '../utils'
 
 const EventsGrid = (props: any) => {
     const [eventsList, setEventsList] = React.useState<EventData[]>(props.gridData)
+    const [gridElements, setGridElements] = React.useState<any[]>([])
 
     React.useEffect(() => {
         setEventsList(props.gridData)
-        console.log('eventsList is here from down the component')
-        console.log(eventsList)
-    }, props.gridData)
+        const events = eventsList.map((item: any) => <GridElement data={item} key={item.id} onClick={handleClick} />)
+        setGridElements(events)
+        console.log(gridElements)
+    }, [props.gridData])
 
     function handleClick() {
 
     }
-
-    const gridElements = eventsList.map((item: any) => <GridElement data={item} onClick={handleClick} />)
-
     return (
         <div className="events-grid--container" >
             <div className="events-grid--headers">

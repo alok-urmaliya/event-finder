@@ -35,10 +35,23 @@
     font-size: 0.7rem;
 }
 
+.events-grid--item:hover{
+    background-color: #1b1b1b;
+    opacity: 1;
+}
+
 .events-grid--item-field{
     display: flex;
     align-items: center;
     justify-content: center;
     width: 200px;
     height: 100px;
+    padding: 10px;
+}
+.events-grid--item-image{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    height: 70px;
 }
