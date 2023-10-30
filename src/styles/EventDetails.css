@@ -1,17 +1,19 @@
 .event-details {
-    width: 650px;
-    height: 620px;
+    width: 620px;
+    max-height: 620px;
     margin-top: 50px;
     background: #444343;
     opacity: 0.7;
-    color: white;
+    color: #ffffff;
+}
+
+.event-detail-tab-panal {
+    background-color: #7BAB83;
 }
 
 .event-details--backbutton {
     background: transparent;
     border: none;
-
-
 }
 
 .event-details--backbutton>span {
@@ -23,6 +25,27 @@
     align-items: center;
     justify-content: center;
     margin-bottom: 10px;
+}
+
+.event-details-favorite-icon {
+    color: red;
+    height: 40px;
+    width: 40px;
+    font-size: 1.5rem;
+    margin-left: 5px;
+    margin-bottom: 0px;
+    background-color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    border: 3px solid aqua;
+    cursor: pointer;
+}
+
+.event-details-favorite-icon:hover {
+    background-color: aqua;
 }
 
 .event-details--event {
@@ -42,18 +65,19 @@
 }
 
 .event-details-item {
+    margin: 3px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 .label-detail {
-    color: white;
+    color: #ffffff;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .event-details-item-text {
-    margin: 5px;
+    margin-top: 5px;
     color: rgba(255, 255, 255, 0.711);
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 0.7rem;
@@ -89,7 +113,7 @@ a {
 
 .venue-details {
     display: grid;
-    height: 400px;
+    max-height: 300px;
     grid-template: 300px 300px / 1fr 1fr;
     margin-right: 30px;
     margin-top: 15px;
@@ -116,8 +140,15 @@ a {
     justify-content: center;
 }
 
+.event-details-item {
+    margin-top: 3px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .venue-details-item-text {
-    margin: 5px;
+    margin-top: 5px;
     color: rgba(255, 255, 255, 0.711);
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 0.7rem;
@@ -129,4 +160,40 @@ a {
     color: white;
     background-color: red;
     border-radius: 10px;
+}
+
+.show-more-btn {
+    color: aqua;
+    background-color: transparent;
+    text-decoration: underline;
+    border: none;
+    display: inline-block;
+}
+
+.event-details-item-artists {
+    color: aqua;
+}
+
+.event-detail-item-link {
+    cursor: pointer;
+    z-index: 1000;
+}
+
+.event-details--links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.event-detail-icons {
+    font-size: 1.5rem;
+    margin: 3px;
+}
+
+.twitter-icon {
+    color: #00acee;
+}
+
+.facebook-icon {
+    color: #0051ff;
 }

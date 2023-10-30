@@ -1,0 +1,37 @@
+.status-code-onsale {
+    width: 60px;
+    height: 25px;
+    border-radius: 10px;
+    color: white;
+    text-align: center;
+    padding-top: 5px;
+    background-color: green;
+}
+
+.status-code-offsale {
+    width: 70px;
+    height: 30px;
+    border-radius: 10px;
+    color: white;
+    background-color: red;
+}
+
+.status-code-canceled {
+    width: 70px;
+    height: 30px;
+    border-radius: 10px;
+    color: white;
+    background-color: black;
+}
+
+.status-code-postponed {
+    width: 70px;
+    height: 30px;
+    border-radius: 10px;
+    color: white;
+    background-color: orange;
+}
+
+.status-code-rescheduled {
+    background-color: orange;
+}

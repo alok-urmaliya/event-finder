@@ -1,7 +1,11 @@
 import React from 'react'
+import '../styles/TicketStatus.css'
 
 const TicketStatus = (props: any) => {
     const [ticketStatus, setTicketStatus] = React.useState(props.ticketstatus);
+
+    console.log(props.ticketstatus)
+    console.log(ticketStatus)
 
     React.useEffect(() => {
         if (props.ticketstatus == 'onsale') {
@@ -25,7 +29,7 @@ const TicketStatus = (props: any) => {
     }, [props.ticketstatus])
 
     return (
-        <p className={`status-code${props.ticketstatus}`}>{ticketStatus}</p>
+        <p className={`status-code-${props.ticketstatus}`}>{ticketStatus}</p>
     )
 }
 

@@ -17,6 +17,7 @@
     background-color: #232323;
     opacity: 1;
     color: white;
+    cursor: pointer;
 }
 
 /* .events-grid--heading{

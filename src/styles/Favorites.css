@@ -1,6 +1,49 @@
-.favorites-page{
+.favorites-page {
+    width: 100%;
+    height: calc(100vh-70px);
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    color: white;
+    justify-content: center;
+    color: black;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.favorite-page--container {
+    background-color: white;
+    border-radius: 10px;
+}
+
+.favorite-page--headings {
+    width: 900px;
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid black;
+}
+
+.favorite-page--heading {
+    padding: 10px;
+}
+
+.favorite-page-item {
+    width: 900px;
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    font-size: 0.8rem;
+    border: 1px solid black;
+}
+
+.favorite-page--item-field {
+    margin: 5px;
+}
+
+.favorite-page--item-icon {
+    font-size: 1.5rem;
+    cursor: pointer;
 }

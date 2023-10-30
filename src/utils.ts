@@ -89,10 +89,23 @@ class Venue {
     }
 }
 
+class Artist {
+    name : string|null
+    url : string | null
+
+    constructor(name:string|null,url:string|null)
+    {
+        this.name = name
+        this.url = url
+    }
+}
+
 class EventDetail {
+    id:string
     name:string|null
+    url:string
     date:string | null
-    artists:string | null
+    artists:Artist[] | null
     venue:string | null
     genre:string | null
     priceranges:string | null
@@ -101,8 +114,10 @@ class EventDetail {
     seatmapimgurl:string | null
     venueData:Venue | null
 
-    constructor( name:string|null,date:string|null, artists:string|null, venue:string|null, genre:string|null, priceranges:string|null, ticketstatus:string|null, buyticketlink:string|null, seatmapimgurl:string|null, eventname:string|null,address:string|null ,phonenumber:string|null ,openhours:string|null ,generalrule:string|null ,childrule:string|null){
+    constructor(id:string, name:string|null,url:string,date:string|null, artists:Artist[]|null, venue:string|null, genre:string|null, priceranges:string|null, ticketstatus:string|null, buyticketlink:string|null, seatmapimgurl:string|null, eventname:string|null,address:string|null ,phonenumber:string|null ,openhours:string|null ,generalrule:string|null ,childrule:string|null){
+        this.id = id
         this.name = name
+        this.url = url
         this.date = date
         this.artists = artists
         this.venue = venue
@@ -129,5 +144,6 @@ export {
     Category,
     EventData,
     Venue,
+    Artist,
     EventDetail
 }

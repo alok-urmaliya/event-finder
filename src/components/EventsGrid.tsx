@@ -11,6 +11,26 @@ const EventsGrid = (props: any) => {
     const [isDetail, setIsDetail] = React.useState<boolean>(false)
     const [selectedEvent, setSelectedEvent] = React.useState('')
 
+
+    const [order, setOrder] = React.useState('ASC')
+
+    function sortData(fieldName: string) {
+        if (order == 'ASC') {
+            const sorted = [...eventsList].sort((a: EventData, b: EventData) => {
+                return (a as any)[fieldName].toLowerCase() > (b as any)[fieldName].toLowerCase() ? 1 : -1
+            })
+            setEventsList(sorted)
+            setOrder('DESC')
+        }
+        if (order == 'DESC') {
+            const sorted = [...eventsList].sort((a: EventData, b: EventData) => {
+                return (a as any)[fieldName].toLowerCase() < (b as any)[fieldName].toLowerCase() ? 1 : -1
+            })
+            setEventsList(sorted)
+            setOrder('ASC')
+        }
+    }
+
     React.useEffect(() => {
         setEventsList(props.gridData)
     }, [props.gridData])
@@ -44,9 +64,9 @@ const EventsGrid = (props: any) => {
                 <div className="events-grid--headers">
                     <h5 className="events-grid--heading">Date/Time</h5>
                     <h5 className="events-grid--heading">Icon</h5>
-                    <h5 className="events-grid--heading">Event</h5>
-                    <h5 className="events-grid--heading">Genre</h5>
-                    <h5 className="events-grid--heading">Venue</h5>
+                    <h5 className="events-grid--heading" onClick={() => sortData("event")}>Event</h5>
+                    <h5 className="events-grid--heading" onClick={() => sortData("genre")}>Genre</h5>
+                    <h5 className="events-grid--heading" onClick={() => sortData("venue")}>Venue</h5>
                 </div>
                 {gridElements}
             </div >)
