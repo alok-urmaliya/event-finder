@@ -113,7 +113,7 @@ a {
 
 .venue-details {
     display: grid;
-    max-height: 300px;
+    max-height: 400px;
     grid-template: 300px 300px / 1fr 1fr;
     margin-right: 30px;
     margin-top: 15px;

@@ -52,12 +52,13 @@ const Search = () => {
         })
         const filteredList = list.filter(item => { if (item != null) return item; })
         setGridData(filteredList ?? null)
+        gridData?.length > 0 ? setGridVisible(true) : setGridVisible(false)
     }, [parsedJson])
 
     return (
         <div className='search-page'>
-            <SearchForm setPayload={setRequestPayload} />
-            <EventsGrid gridData={gridData} />
+            <SearchForm setPayload={setRequestPayload} setGridVisible={setGridVisible} />
+            {gridVisible && <EventsGrid gridData={gridData} />}
         </div>
     )
 }

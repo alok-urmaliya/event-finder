@@ -37,7 +37,6 @@ const EventsGrid = (props: any) => {
 
     React.useEffect(() => {
         if (eventsList.length > 0) {
-            console.log(eventsList)
             const events = eventsList.map((item: any) => <GridElement data={item} key={item?.id} handleDetailClick={handleDetailClick} />)
             setGridElements(events)
         }
@@ -51,7 +50,6 @@ const EventsGrid = (props: any) => {
     }
 
     function handleDetailClick(eventkey: string) {
-        console.log(`this element was clicked:  ${eventkey}`)
         setSelectedEvent(eventkey)
         setIsDetail(prev => !prev)
     }

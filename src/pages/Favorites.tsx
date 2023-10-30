@@ -14,10 +14,10 @@ const Favorites = () => {
 
     React.useEffect(() => {
         const tempFavoriteEventElements = favoriteList && favoriteList.map((data) => {
-            let count = 1
+            const count = '#'
             return (
-                <div className="favorite-page-item" key={data?.id}>
-                    <p className='favorite-page--item-field'>{count++}</p>
+                <div className="favorite-page-item" key={count}>
+                    <p className='favorite-page--item-field'>{count}</p>
                     <p className='favorite-page--item-field'>{data?.date}</p>
                     <p className='favorite-page--item-field'>{data?.event}</p>
                     <p className='favorite-page--item-field'>{data?.genre}</p>
@@ -37,7 +37,7 @@ const Favorites = () => {
 
     return (
         <div className="favorites-page">
-            <div className="favorite-page--container">
+            {favoriteEventElements?.length && favoriteEventElements?.length > 0 ? (<div className="favorite-page--container">
                 <div className="favorite-page--headings">
                     <h4 className="favorite-page--heading">#</h4>
                     <h4 className="favorite-page--heading">Date/Time</h4>
@@ -48,7 +48,11 @@ const Favorites = () => {
 
                 </div>
                 {favoriteEventElements}
-            </div>
+            </div>) : (
+                <div className="favorite-page-empty">
+                    No records available!
+                </div>
+            )}
         </div>
     )
 }

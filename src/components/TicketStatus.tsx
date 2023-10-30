@@ -4,9 +4,6 @@ import '../styles/TicketStatus.css'
 const TicketStatus = (props: any) => {
     const [ticketStatus, setTicketStatus] = React.useState(props.ticketstatus);
 
-    console.log(props.ticketstatus)
-    console.log(ticketStatus)
-
     React.useEffect(() => {
         if (props.ticketstatus == 'onsale') {
             setTicketStatus("On Sale")

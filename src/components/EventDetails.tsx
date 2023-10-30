@@ -22,26 +22,6 @@ const EventDetails = (props: any) => {
 
     const [isFavorite, setIsFavorite] = React.useState(false)
 
-    const eventData = {
-        name: 'P!NK: Summer Carnival 2023',
-        date: '2023-08-09 18:00:00',
-        artists: 'Alok | Kumar | Urmaliya',
-        venue: 'Manas bhavan jabalpur',
-        genre: 'Music | Sports | Film',
-        priceranges: '500-2000',
-        ticketstatus: 'onsale',
-        buyticketlink: 'google.com',
-        seatmapimgurl: 'https://content.resale.ticketmaster.com/graphics/TMResale/1/VenueMaps/475-481-3-0-DodgerStadiumLADodgers.png',
-        venueData: {
-            name: 'Cameron Park',
-            address: 'Jabalpur, madhya pradesh 482002',
-            phonenumber: '213-742-7340',
-            openhours: 'Monday - Saturday: 10:00am to 6:00pm **Tickets are not on-sale at the Box Office on the first day an event goes on-sale** The Box Office will be open at 10:00am daily or 90 minutes before the 1st performance of the day, whichever is earlier and will stay open until 8:00pm or 30 minutes after the last performance of the day begins, whichever is later. Sunday – Closed If an event takes place on Sunday, Box Office will open 90 minutes before the event start time and remain open 1 hour after event start time for Will Call and tickets sales for the evening',
-            generalrule: 'ARRIVE EARLY: Please arrive at least one-hour prior to event time. All patrons will go through a screening process upon entry with all packages, including briefcases and pocketbooks, being inspected prior to entry. Additionally, metal detectors may be utilized for some events. Bags that have passed inspection must fit comfortably under your seat.Please be mindful of traffic conditions, as Midtown Manhattan can be quite congested, especially during the holidays, parades, or special events. No smoking or electronic cigarettes permitted anywhere in the building No reentry. No recording devices No outside food or drink There are no bag or coat check facilities Alcohol Management: For most events at MSG, alcoholic beverages are available for purchase. MSG staff is trained in the nationally recognized T.E.A.M. (Techniques for Effective Alcohol Management) training program for responsible alcohol management. All guests will be required to show ID to purchase alcohol. Guests are not permitted to bring in alcoholic beverages from outside and may not leave with alcohol purchased inside the venue. Management reserves the right to refuse the sale of alcohol to any guest. Please be aware that it is the policy of The Madison Square Garden Company to require all guests who appear to be forty (40) years of age or younger to present a valid form of ID with proof of age in order to purchase alcoholic beverages at Madison Square Garden, Radio City Music Hall, The Beacon Theatre or The Chicago Theatre. Pursuant to applicable State law, MSG accepts only the following forms of identification: • A valid driver’s license or non-driver identification card issued by the United States Government, a State Government, Commonwealth, Possession or Territory of the United States or a Provincial Government of Canada. • A valid passport • A valid U.S. military ID International guests wishing to consume alcohol inside the building must bring a valid passport as the only form of acceptable ID.',
-            childrule: 'For most events, all children who have reached their second birthday require a ticket to gain admittance to Madison Square Garden. Any child who has yet to reach their second birthday does not require a ticket, however, they may not occupy their own seat. Please note, that for certain childrens events (such as the Wiggles and Sesame Street Live!), all children who have reached their first birthday require a ticket. Please check the event profile for your specific event for more information prior to your purchase of tickets.'
-        }
-    }
-
     useEffect(() => {
         (async () => {
             const response = selectedEvent != ''
@@ -79,10 +59,6 @@ const EventDetails = (props: any) => {
         setEventDetail(tempEventDetail)
     }, [eventJson])
 
-    React.useEffect(() => {
-
-    }, [])
-
     function handleTabs(e: any, value: any) {
         setActiveTab(value)
     }
@@ -107,7 +83,6 @@ const EventDetails = (props: any) => {
                     <div className="artist-elements">
                         {artistElements}
                     </div>
-                    {/* <p className="event-details-item-text event-details-item-artists">{eventDetail?.artists?.map((att: any) => att.name).join(' | ') ?? ''}</p> */}
                 </div>
                 <div className="event-details-item">
                     <p className="label-detail">Venue</p>
@@ -208,8 +183,6 @@ const EventDetails = (props: any) => {
         }
 
         favoriteList.push(newFavoriteElement)
-        console.log(favoriteList)
-        console.log(JSON.stringify(favoriteList))
         localStorage.setItem('favoriteList', JSON.stringify(favoriteList))
     }
 

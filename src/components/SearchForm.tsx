@@ -2,6 +2,8 @@ import React from 'react'
 import '../styles/SearchForm.css'
 import EventHelper from '../helpers/EventHelper';
 import { FormData, Category } from '../utils';
+import { Autocomplete } from '@mui/material';
+import TextField from '@mui/material';
 
 const SearchForm = (props: any) => {
     const [formData, setFormData] = React.useState(
@@ -38,6 +40,7 @@ const SearchForm = (props: any) => {
             location: "",
             autoDetectLocation: false
         });
+        props.setGridVisible(false)
     }
 
     return (
