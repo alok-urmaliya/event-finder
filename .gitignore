@@ -6,6 +6,10 @@
 .pnp.js
 .vs/
 
+# api
+__pycache__
+.venv/
+
 # testing
 /coverage
 
