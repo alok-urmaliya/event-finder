@@ -4,31 +4,26 @@ import SearchForm from '../components/SearchForm'
 import EventsGrid from '../components/EventsGrid'
 import { EventData, EventPayload } from '../utils'
 import axios from 'axios'
-import { parse } from 'path'
 
 const Search = () => {
-    const [requestPayload, setRequestPayload] = React.useState(new EventPayload('', '', '', '', ''))
+    const [requestPayload, setRequestPayload] = React.useState<EventPayload | null>(null)
     const [gridData, setGridData] = React.useState<(EventData | null)[]>([])
-    const [gridVisible, setGridVisible] = React.useState(false)
-    const [parsedJson, setParsedJson] = React.useState<any[]>([])
+    const [gridVisible, setGridVisible] = React.useState<boolean>(false)
 
     useEffect(() => {
-        (async () => {
-            const response = requestPayload.latitude != '' ? await axios.get('http://127.0.0.1:8000/events', {
-                params: {
-                    "keyword": requestPayload.keyword,
-                    "distance": requestPayload.distance,
-                    "category": requestPayload.category,
-                    "latitude": requestPayload.latitude,
-                    "longitude": requestPayload.longitude
-                }
-            }).then(res => res.data)
-                .then((res: any) => setParsedJson(res)) : null
-            return response
-        })()
+        requestPayload != null && axios.get('http://127.0.0.1:8000/events', {
+            params: {
+                "keyword": requestPayload.keyword,
+                "distance": requestPayload.distance,
+                "category": requestPayload.category,
+                "latitude": requestPayload.latitude,
+                "longitude": requestPayload.longitude
+            }
+        }).then(res => res.data)
+            .then(res => populateGridData(res))
     }, [requestPayload])
 
-    React.useEffect(() => {
+    function populateGridData(parsedJson: any) {
         let list: (EventData | null)[] = [];
         list = parsedJson.map((item: any) => {
             if (item._embedded?.venues[0].name == null ||
@@ -51,9 +46,9 @@ const Search = () => {
             )
         })
         const filteredList = list.filter(item => { if (item != null) return item; })
-        setGridData(filteredList ?? null)
+        setGridData(filteredList)
         gridData?.length > 0 ? setGridVisible(true) : setGridVisible(false)
-    }, [parsedJson])
+    }
 
     return (
         <div className='search-page'>
