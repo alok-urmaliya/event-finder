@@ -1,11 +1,14 @@
 import React from 'react'
 import '../styles/SearchForm.css'
 import EventHelper from '../helpers/EventHelper';
-import { FormData, Category } from '../utils';
-import { Autocomplete } from '@mui/material';
-import TextField from '@mui/material';
+import { FormData, Category, EventPayload } from '../utils';
 
-const SearchForm = (props: any) => {
+interface SearchFormProps {
+    setGridVisible: React.Dispatch<React.SetStateAction<boolean>>;
+    submitForm: (requestPayload: EventPayload) => void;
+}
+
+const SearchForm: React.FC<SearchFormProps> = ({ setGridVisible, submitForm }) => {
     const [formData, setFormData] = React.useState(
         new FormData(
             "",
@@ -19,7 +22,7 @@ const SearchForm = (props: any) => {
     async function handleSubmit(event: any) {
         event.preventDefault();
         const payload: any = await EventHelper.getEventRequestPayload(formData);
-        props.setPayload(payload)
+        submitForm(payload)
     }
 
     function handleChange(event: any) {
@@ -40,7 +43,7 @@ const SearchForm = (props: any) => {
             location: "",
             autoDetectLocation: false
         });
-        props.setGridVisible(false)
+        setGridVisible(false)
     }
 
     return (
