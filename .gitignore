@@ -26,3 +26,7 @@ __pycache__
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Private Settings file.
+app_settings.py
+event-finder-api/EventFinderAPI/app_settings.py
