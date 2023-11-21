@@ -19,10 +19,10 @@ const SearchForm: React.FC<SearchFormProps> = ({ setGridVisible, submitForm }) =
         )
     )
 
-    async function handleSubmit(event: any) {
+    function handleSubmit(event: any) {
         event.preventDefault();
-        const payload: any = await EventHelper.getEventRequestPayload(formData);
-        submitForm(payload)
+        EventHelper.getEventRequestPayload(formData)
+            .then(payload => submitForm(payload))
     }
 
     function handleChange(event: any) {
