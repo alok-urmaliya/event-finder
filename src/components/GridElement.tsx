@@ -1,13 +1,15 @@
 import React from 'react'
 import '../styles/EventsGrid.css'
+import { EventData } from '../utils'
 
-const GridElement = (props: any) => {
-    const [data, setData] = React.useState<any>(props.data)
-
+interface GridElementProps {
+    data: EventData;
+    handleDetailClick: (eventkey: string) => void;
+}
+const GridElement: React.FC<GridElementProps> = ({ data, handleDetailClick }) => {
     function handleClick() {
-        props.handleDetailClick(data.id)
+        handleDetailClick(data.id)
     }
-
     return (
         <div className="events-grid--item" onClick={handleClick}>
             <p className='events-grid--item-field'>{data.date}</p>

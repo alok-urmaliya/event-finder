@@ -1,37 +1,42 @@
 import React from "react";
 import { MdDelete } from "react-icons/md";
 import '../styles/Favorites.css'
+import { FavoriteEvent } from "../utils";
 
 const Favorites = () => {
-    const [favoriteList, setFavoriteList] = React.useState<any[]>()
     const [favoriteEventElements, setFavoriteEventElements] = React.useState<any[]>()
 
     React.useEffect(() => {
-        const favoriteListString = localStorage.getItem('favoriteList')
-        const tempFavoriteList = favoriteListString != null ? JSON.parse(favoriteListString) : []
-        setFavoriteList(tempFavoriteList)
+        const favoriteList = getFavoriteList();
+        setFavoriteGridItems(favoriteList);
     }, [])
 
-    React.useEffect(() => {
+    function getFavoriteList() {
+        const favoriteListString = localStorage.getItem('favoriteList')
+        const favoriteList: FavoriteEvent[] = favoriteListString != null ? JSON.parse(favoriteListString) : []
+        return favoriteList;
+    }
+
+    function setFavoriteGridItems(favoriteList: FavoriteEvent[]) {
         const tempFavoriteEventElements = favoriteList && favoriteList.map((data) => {
-            const count = '#'
             return (
-                <div className="favorite-page-item" key={count}>
-                    <p className='favorite-page--item-field'>{count}</p>
-                    <p className='favorite-page--item-field'>{data?.date}</p>
-                    <p className='favorite-page--item-field'>{data?.event}</p>
-                    <p className='favorite-page--item-field'>{data?.genre}</p>
-                    <p className='favorite-page--item-field'>{data?.venue}</p>
+                <div className="favorite-page-item" key={data.index}>
+                    <p className='favorite-page--item-field'>{data.index}</p>
+                    <p className='favorite-page--item-field'>{data.date}</p>
+                    <p className='favorite-page--item-field'>{data.event}</p>
+                    <p className='favorite-page--item-field'>{data.genre}</p>
+                    <p className='favorite-page--item-field'>{data.venue}</p>
                     <p className='favorite-page--item-icon' onClick={() => deleteFromFavorites(data.id)}><MdDelete /></p>
                 </div>
             )
         })
         setFavoriteEventElements(tempFavoriteEventElements)
-    }, [favoriteList])
+    }
 
     function deleteFromFavorites(key: string) {
+        const favoriteList = getFavoriteList();
         const tempFavoriteList = favoriteList?.filter(item => item.id != key)
-        setFavoriteList(tempFavoriteList)
+        setFavoriteGridItems(tempFavoriteList)
         localStorage.setItem('favoriteList', JSON.stringify(tempFavoriteList))
     }
 

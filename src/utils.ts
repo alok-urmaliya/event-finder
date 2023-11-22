@@ -137,6 +137,25 @@ class EventDetail {
     }
 }
 
+class FavoriteEvent{
+    index : number
+    id : string
+    date : string
+    event : string
+    genre : string
+    venue : string
+
+    constructor(index : number,id : string,date : string, event : string, genre : string, venue : string)
+    {
+        this.index = index
+        this.id = id
+        this.date = date
+        this.event = event
+        this.genre = genre
+        this.venue = venue
+    }
+}
+
 export {
     FormData,
     Location,
@@ -145,5 +164,6 @@ export {
     EventData,
     Venue,
     Artist,
-    EventDetail
+    EventDetail,
+    FavoriteEvent
 }

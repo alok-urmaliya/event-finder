@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { Tabs, Tab } from '@mui/material'
 import '../styles/EventDetails.css'
 import axios from 'axios'
-import { EventDetail } from '../utils'
+import { EventDetail, FavoriteEvent } from '../utils'
 import { Artist } from '../utils'
 import TicketStatus from './TicketStatus'
 import { AiOutlineTwitter, AiFillFacebook } from "react-icons/ai";
@@ -171,10 +171,19 @@ const EventDetails = (props: any) => {
     )
 
     function addToFavorites() {
-        const favoriteListString = localStorage.getItem('favoriteList')
-        const favoriteList: any[] = favoriteListString != null ? JSON.parse(favoriteListString) : []
+        const favoriteListString = localStorage.getItem('favoriteList') ?? ""
+        const favoriteList: any[] = JSON.parse(favoriteListString)
+        // const newFavoriteElement = new FavoriteEvent(
+        //     favoriteList.length + 1,
+        //     eventDetail.id,
+        //     eventDetail?.date,
+        //     eventDetail?.name,
+        //     eventDetail?.genre,
+        //     eventDetail?.venue
+        // )
 
         const newFavoriteElement = {
+            index: favoriteList.length + 1,
             id: eventDetail?.id,
             date: eventDetail?.date,
             event: eventDetail?.name,
