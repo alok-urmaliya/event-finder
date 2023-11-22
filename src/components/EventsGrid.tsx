@@ -1,49 +1,47 @@
-import React from 'react'
+import React, { Dispatch } from 'react'
 import '../styles/EventsGrid.css'
 import GridElement from './GridElement'
-import icon from './logo192.png'
 import { EventData } from '../utils'
 import EventDetails from './EventDetails'
 
-const EventsGrid = (props: any) => {
-    const [eventsList, setEventsList] = React.useState<EventData[]>(props.gridData)
+interface EventsGridProps {
+    gridData: EventData[];
+    setGridData: React.Dispatch<React.SetStateAction<EventData[]>>;
+}
+
+const EventsGrid: React.FC<EventsGridProps> = ({ gridData, setGridData }) => {
     const [gridElements, setGridElements] = React.useState<any[]>([])
     const [isDetail, setIsDetail] = React.useState<boolean>(false)
     const [selectedEvent, setSelectedEvent] = React.useState('')
-
 
     const [order, setOrder] = React.useState('ASC')
 
     function sortData(fieldName: string) {
         if (order == 'ASC') {
-            const sorted = [...eventsList].sort((a: EventData, b: EventData) => {
+            const sorted = [...gridData].sort((a: EventData, b: EventData) => {
                 return (a as any)[fieldName].toLowerCase() > (b as any)[fieldName].toLowerCase() ? 1 : -1
             })
-            setEventsList(sorted)
+            setGridData(sorted)
             setOrder('DESC')
         }
         if (order == 'DESC') {
-            const sorted = [...eventsList].sort((a: EventData, b: EventData) => {
+            const sorted = [...gridData].sort((a: EventData, b: EventData) => {
                 return (a as any)[fieldName].toLowerCase() < (b as any)[fieldName].toLowerCase() ? 1 : -1
             })
-            setEventsList(sorted)
+            setGridData(sorted)
             setOrder('ASC')
         }
     }
 
     React.useEffect(() => {
-        setEventsList(props.gridData)
-    }, [props.gridData])
-
-    React.useEffect(() => {
-        if (eventsList.length > 0) {
-            const events = eventsList.map((item: any) => <GridElement data={item} key={item?.id} handleDetailClick={handleDetailClick} />)
+        if (gridData.length > 0) {
+            const events = gridData.map((item: EventData) => <GridElement data={item} key={item?.id} handleDetailClick={handleDetailClick} />)
             setGridElements(events)
         }
         else {
             const message = [<div className='no-records-found'>No Records Found</div>]
         }
-    }, [eventsList])
+    }, [gridData])
 
     function handleBackClick() {
         setIsDetail(prev => !prev)
@@ -57,17 +55,20 @@ const EventsGrid = (props: any) => {
 
 
     return (
-        isDetail ? <EventDetails handleBackClick={handleBackClick} event={selectedEvent} /> : (
-            < div className="events-grid--container">
-                <div className="events-grid--headers">
-                    <h5 className="events-grid--heading">Date/Time</h5>
-                    <h5 className="events-grid--heading">Icon</h5>
-                    <h5 className="events-grid--heading" onClick={() => sortData("event")}>Event</h5>
-                    <h5 className="events-grid--heading" onClick={() => sortData("genre")}>Genre</h5>
-                    <h5 className="events-grid--heading" onClick={() => sortData("venue")}>Venue</h5>
-                </div>
-                {gridElements}
-            </div >)
+        isDetail ?
+            <EventDetails handleBackClick={handleBackClick} event={selectedEvent} />
+            : (
+                < div className="events-grid--container">
+                    <div className="events-grid--headers">
+                        <h5 className="events-grid--heading">Date/Time</h5>
+                        <h5 className="events-grid--heading">Icon</h5>
+                        <h5 className="events-grid--heading" onClick={() => sortData("event")}>Event</h5>
+                        <h5 className="events-grid--heading" onClick={() => sortData("genre")}>Genre</h5>
+                        <h5 className="events-grid--heading" onClick={() => sortData("venue")}>Venue</h5>
+                    </div>
+                    {gridElements}
+                </div >
+            )
     )
 }
 

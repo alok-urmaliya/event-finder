@@ -7,7 +7,7 @@ import axios from 'axios'
 
 const Search = () => {
     const [gridVisible, setGridVisible] = React.useState<boolean>(false)
-    const [gridData, setGridData] = React.useState<(EventData | null)[]>([])
+    const [gridData, setGridData] = React.useState<EventData[]>([])
 
     function getEvents(requestPayload: EventPayload) {
         requestPayload != null && axios.get('http://127.0.0.1:8000/events', {
@@ -51,7 +51,7 @@ const Search = () => {
     return (
         <div className='search-page'>
             <SearchForm setGridVisible={setGridVisible} submitForm={getEvents} />
-            {gridVisible && <EventsGrid gridData={gridData} />}
+            {gridVisible && <EventsGrid gridData={gridData} setGridData={setGridData} />}
         </div>
     )
 }
