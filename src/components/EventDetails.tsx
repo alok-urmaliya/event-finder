@@ -23,12 +23,12 @@ const EventDetails = (props: any) => {
             const response = selectedEvent != ''
                 ? await axios.get('http://127.0.0.1:8000/eventdetail', { params: { "id": selectedEvent } })
                     .then(res => res.data)
-                    .then((res: any) => setEventJson(res))
+                    .then(res => populateEventDetails(res))
                 : null
         })()
     }, [selectedEvent])
 
-    useEffect(() => {
+    function populateEventDetails(eventJson: any) {
         const artists: Artist[] = eventJson?._embedded.attractions?.map((att: any) => ({ name: att.name, url: att.url }))
         setArtistElements(artists?.map(artist => {
             return (<a href={artist.url ?? ''} target='_blank' className="event-details-item-text event-details-item-artists">{artist.name + ' | '}</a>)
@@ -53,7 +53,7 @@ const EventDetails = (props: any) => {
             eventJson._embedded?.venues[0]?.generalInfo?.childRule || null
         ) : undefined;
         setEventDetail(tempEventDetail)
-    }, [eventJson])
+    }
 
     function handleTabs(e: any, value: any) {
         setActiveTab(value)
