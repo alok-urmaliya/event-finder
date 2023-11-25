@@ -17,14 +17,14 @@ const EventsGrid: React.FC<EventsGridProps> = ({ gridData, setGridData }) => {
     const [order, setOrder] = React.useState('ASC')
 
     function sortData(fieldName: string) {
-        if (order == 'ASC') {
+        if (order === 'ASC') {
             const sorted = [...gridData].sort((a: EventData, b: EventData) => {
                 return (a as any)[fieldName].toLowerCase() > (b as any)[fieldName].toLowerCase() ? 1 : -1
             })
             setGridData(sorted)
             setOrder('DESC')
         }
-        if (order == 'DESC') {
+        if (order === 'DESC') {
             const sorted = [...gridData].sort((a: EventData, b: EventData) => {
                 return (a as any)[fieldName].toLowerCase() < (b as any)[fieldName].toLowerCase() ? 1 : -1
             })

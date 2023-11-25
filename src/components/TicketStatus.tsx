@@ -5,19 +5,19 @@ const TicketStatus = (props: any) => {
     const [ticketStatus, setTicketStatus] = React.useState(props.ticketstatus);
 
     React.useEffect(() => {
-        if (props.ticketstatus == 'onsale') {
+        if (props.ticketstatus === 'onsale') {
             setTicketStatus("On Sale")
         }
-        else if (props.ticketstatus == 'offsale') {
+        else if (props.ticketstatus === 'offsale') {
             setTicketStatus("Off Sale")
         }
-        else if (props.ticketstatus == 'canceled') {
+        else if (props.ticketstatus === 'canceled') {
             setTicketStatus("Canceled")
         }
-        else if (props.ticketstatus == 'postponed') {
+        else if (props.ticketstatus === 'postponed') {
             setTicketStatus("Postponed")
         }
-        else if (props.ticketstatus == 'rescheduled') {
+        else if (props.ticketstatus === 'rescheduled') {
             setTicketStatus("Rescheduled")
         }
         else {

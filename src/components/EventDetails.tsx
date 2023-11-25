@@ -12,9 +12,7 @@ const EventDetails = (props: any) => {
     const [activeTab, setActiveTab] = React.useState(0)
     const [selectedEvent] = React.useState(props.event);
     const [eventDetail, setEventDetail] = React.useState<EventDetail>();
-
     const [artistElements, setArtistElements] = React.useState<any[]>([])
-
     const [isFavorite, setIsFavorite] = React.useState(false)
 
     useEffect(() => {
@@ -101,8 +99,8 @@ const EventDetails = (props: any) => {
                 <Tab label='Events' />
                 <Tab label='Venue' />
             </Tabs>
-            {activeTab == 0 && (<EventTab eventDetail={eventDetail} artistElements={artistElements} />)}
-            {activeTab == 1 && (<VenueTab eventDetail={eventDetail} />)}
+            {activeTab === 0 && (<EventTab eventDetail={eventDetail} artistElements={artistElements} />)}
+            {activeTab === 1 && (<VenueTab eventDetail={eventDetail} />)}
         </div>
     )
 }
