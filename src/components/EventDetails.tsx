@@ -18,13 +18,9 @@ const EventDetails = (props: any) => {
     const [isFavorite, setIsFavorite] = React.useState(false)
 
     useEffect(() => {
-        (async () => {
-            const response = selectedEvent != ''
-                ? await axios.get('http://127.0.0.1:8000/eventdetail', { params: { "id": selectedEvent } })
-                    .then(res => res.data)
-                    .then(res => populateEventDetails(res))
-                : null
-        })()
+        selectedEvent != '' && axios.get('http://127.0.0.1:8000/eventdetail', { params: { "id": selectedEvent } })
+            .then(res => res.data)
+            .then(res => populateEventDetails(res))
     }, [selectedEvent])
 
     function populateEventDetails(eventJson: any) {
