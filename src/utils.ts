@@ -102,19 +102,19 @@ class Artist {
 
 class EventDetail {
     id:string
-    name:string|null
+    name:string
     url:string
-    date:string | null
+    date:string
     artists:Artist[] | null
-    venue:string | null
-    genre:string | null
+    venue:string
+    genre:string
     priceranges:string | null
     ticketstatus:string | null
     buyticketlink:string | null
     seatmapimgurl:string | null
     venueData:Venue | null
 
-    constructor(id:string, name:string|null,url:string,date:string|null, artists:Artist[]|null, venue:string|null, genre:string|null, priceranges:string|null, ticketstatus:string|null, buyticketlink:string|null, seatmapimgurl:string|null, eventname:string|null,address:string|null ,phonenumber:string|null ,openhours:string|null ,generalrule:string|null ,childrule:string|null){
+    constructor(id:string, name:string,url:string,date:string, artists:Artist[]|null, venue:string, genre:string, priceranges:string|null, ticketstatus:string|null, buyticketlink:string|null, seatmapimgurl:string|null, eventname:string|null,address:string|null ,phonenumber:string|null ,openhours:string|null ,generalrule:string|null ,childrule:string|null){
         this.id = id
         this.name = name
         this.url = url

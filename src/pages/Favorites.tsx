@@ -4,7 +4,7 @@ import '../styles/Favorites.css'
 import { FavoriteEvent } from "../utils";
 
 const Favorites = () => {
-    const [favoriteEventElements, setFavoriteEventElements] = React.useState<any[]>()
+    const [favoriteEventElements, setFavoriteEventElements] = React.useState<React.ReactNode[]>()
 
     React.useEffect(() => {
         const favoriteList = getFavoriteList();
@@ -20,7 +20,7 @@ const Favorites = () => {
     function setFavoriteGridItems(favoriteList: FavoriteEvent[]) {
         const tempFavoriteEventElements = favoriteList && favoriteList.map((data) => {
             return (
-                <div className="favorite-page-item" key={data.index}>
+                <div className="favorite-page-item" key={data.id}>
                     <p className='favorite-page--item-field'>{data.index}</p>
                     <p className='favorite-page--item-field'>{data.date}</p>
                     <p className='favorite-page--item-field'>{data.event}</p>

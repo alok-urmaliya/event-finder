@@ -11,6 +11,7 @@ import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
 const EventDetails = (props: any) => {
     const [activeTab, setActiveTab] = React.useState(0)
     const [selectedEvent] = React.useState(props.event);
+
     const [eventDetail, setEventDetail] = React.useState<EventDetail>();
     const [artistElements, setArtistElements] = React.useState<any[]>([])
     const [isFavorite, setIsFavorite] = React.useState(false)
@@ -23,17 +24,19 @@ const EventDetails = (props: any) => {
 
     function populateEventDetails(eventJson: any) {
         const artists: Artist[] = eventJson?._embedded.attractions?.map((att: any) => ({ name: att.name, url: att.url }))
+
         setArtistElements(artists?.map(artist => {
             return (<a href={artist.url ?? ''} target='_blank' className="event-details-item-text event-details-item-artists">{artist.name + ' | '}</a>)
         }))
-        const tempEventDetail = eventJson != null ? new EventDetail(
+
+        const tempEventDetail = new EventDetail(
             eventJson.id,
             eventJson.name,
             eventJson.url,
             eventJson.dates?.start?.localDate + ' ' + eventJson.dates?.start?.localTime,
             artists,
             eventJson._embedded?.venues && eventJson._embedded?.venues?.length > 0 ? eventJson._embedded?.venues[0]?.name : null,
-            (eventJson.classifications[0]?.segment?.name + '|' + eventJson.classifications[0]?.genre?.name + '|' + eventJson.classifications[0]?.subGenre?.name + '|' + eventJson.classifications[0]?.type?.name + '|' + eventJson.classifications[0]?.subType?.name) || null,
+            (eventJson.classifications[0]?.segment?.name + '|' + eventJson.classifications[0]?.genre?.name + '|' + eventJson.classifications[0]?.subGenre?.name + '|' + eventJson.classifications[0]?.type?.name + '|' + eventJson.classifications[0]?.subType?.name) || "Not Provided",
             (eventJson.priceRanges[0]?.min + '-' + eventJson.priceRanges[0]?.max) || null,
             eventJson.dates?.status?.code || null,
             eventJson?._embedded?.attractions[0]?.url || '',
@@ -44,7 +47,7 @@ const EventDetails = (props: any) => {
             eventJson._embedded?.venues[0]?.boxOfficeInfo?.openHoursDetail || null,
             eventJson._embedded?.venues[0]?.generalInfo?.generalRule || null,
             eventJson._embedded?.venues[0]?.generalInfo?.childRule || null
-        ) : undefined;
+        );
         setEventDetail(tempEventDetail)
     }
 
@@ -53,28 +56,22 @@ const EventDetails = (props: any) => {
     }
 
     function addToFavorites() {
+        setIsFavorite(true);
         const favoriteListString = localStorage.getItem('favoriteList') ?? ""
         const favoriteList: any[] = JSON.parse(favoriteListString)
-        // const newFavoriteElement = new FavoriteEvent(
-        //     favoriteList.length + 1,
-        //     eventDetail.id,
-        //     eventDetail?.date,
-        //     eventDetail?.name,
-        //     eventDetail?.genre,
-        //     eventDetail?.venue
-        // )
 
-        const newFavoriteElement = {
-            index: favoriteList.length + 1,
-            id: eventDetail?.id,
-            date: eventDetail?.date,
-            event: eventDetail?.name,
-            genre: eventDetail?.genre,
-            venue: eventDetail?.venue,
+        if (eventDetail) {
+            const newFavoriteElement = new FavoriteEvent(
+                favoriteList.length + 1,
+                eventDetail.id,
+                eventDetail.date,
+                eventDetail.name,
+                eventDetail.genre,
+                eventDetail.venue
+            )
+            favoriteList.push(newFavoriteElement)
+            localStorage.setItem('favoriteList', JSON.stringify(favoriteList))
         }
-
-        favoriteList.push(newFavoriteElement)
-        localStorage.setItem('favoriteList', JSON.stringify(favoriteList))
     }
 
     return (
