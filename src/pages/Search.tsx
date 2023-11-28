@@ -23,17 +23,15 @@ const Search = () => {
     }
 
     function populateGridData(parsedJson: any) {
-        let list: EventData[] = parsedJson.map((item: any) => {
-            if (item._embedded?.venues[0].name == null ||
-                item._embedded?.venues[0]?.address?.line1 == null ||
-                item._embedded?.venues[0]?.boxOfficeInfo?.phoneNumberDetail == null ||
-                item._embedded?.venues[0]?.boxOfficeInfo?.openHoursDetail == null ||
-                item._embedded?.venues[0]?.generalInfo?.generalRule == null ||
-                item._embedded?.venues[0]?.generalInfo?.childRule == null) {
-                return null
-            }
-            return (
-                new EventData(
+        let eventsList: EventData[] = []
+        parsedJson.forEach((item: any) => {
+            if (item._embedded?.venues[0].name &&
+                item._embedded?.venues[0]?.address?.line1 &&
+                item._embedded?.venues[0]?.boxOfficeInfo?.phoneNumberDetail &&
+                item._embedded?.venues[0]?.boxOfficeInfo?.openHoursDetail &&
+                item._embedded?.venues[0]?.generalInfo?.generalRule &&
+                item._embedded?.venues[0]?.generalInfo?.childRule) {
+                var event = new EventData(
                     item.id,
                     item.dates.start.localDate + ' ' + item.dates.start.localTime ?? null,
                     item.images[0].url ?? null,
@@ -41,10 +39,10 @@ const Search = () => {
                     item.classifications?.length > 0 ? item.classifications[0].segment.name : null,
                     item._embedded?.venues[0].name ?? null
                 )
-            )
+                eventsList.push(event)
+            }
         })
-        const filteredList = list.filter(item => { if (item != null) return item; })
-        setGridData(filteredList)
+        setGridData(eventsList)
         gridData.length > 0 && setGridVisible(true)
     }
 
