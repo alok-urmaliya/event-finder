@@ -29,6 +29,8 @@ const EventDetails = (props: any) => {
             return (<a href={artist.url ?? ''} target='_blank' className="event-details-item-text event-details-item-artists">{artist.name + ' | '}</a>)
         }))
 
+        const segmentSection = eventJson.classifications[0]?.segment?.name + '|' + eventJson.classifications[0]?.genre?.name + '|' + eventJson.classifications[0]?.subGenre?.name + '|' + eventJson.classifications[0]?.type?.name + '|' + eventJson.classifications[0]?.subType?.name || "Not Provided"
+
         const tempEventDetail = new EventDetail(
             eventJson.id,
             eventJson.name,
@@ -36,7 +38,7 @@ const EventDetails = (props: any) => {
             eventJson.dates?.start?.localDate + ' ' + eventJson.dates?.start?.localTime,
             artists,
             eventJson._embedded?.venues && eventJson._embedded?.venues?.length > 0 ? eventJson._embedded?.venues[0]?.name : null,
-            (eventJson.classifications[0]?.segment?.name + '|' + eventJson.classifications[0]?.genre?.name + '|' + eventJson.classifications[0]?.subGenre?.name + '|' + eventJson.classifications[0]?.type?.name + '|' + eventJson.classifications[0]?.subType?.name) || "Not Provided",
+            segmentSection,
             (eventJson.priceRanges[0]?.min + '-' + eventJson.priceRanges[0]?.max) || null,
             eventJson.dates?.status?.code || null,
             eventJson?._embedded?.attractions[0]?.url || '',

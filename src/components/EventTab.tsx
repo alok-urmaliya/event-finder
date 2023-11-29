@@ -9,6 +9,11 @@ interface EventDataProps {
 }
 
 const EventTab: React.FC<EventDataProps> = ({ eventDetail, artistElements }) => {
+    React.useEffect(() => {
+        console.log(eventDetail)
+        console.log(artistElements)
+    }, [])
+
     function shareToFacebook() {
         window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(eventDetail?.url ?? '')}`, '_blank');
     };
