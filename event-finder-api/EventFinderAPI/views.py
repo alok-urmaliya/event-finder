@@ -40,4 +40,21 @@ class EventListAPIView(APIView):
         return JsonResponse(event, safe = False)
     
     def GetSuggestion(request):
-        return "suggestion API response"
+        api_url = API_URLS['SUGGEST_API']
+        payload = {
+            "apikey": TICKETMASTER_SECRET_KEY,
+            "keyword": request.GET.get("keyword")
+        }
+        try:
+            response = requests.get(api_url, params=payload)
+            responseJson = json.loads(response.content)
+            _embedded = responseJson["_embedded"]
+            venues = _embedded["venues"]
+            print(venues)
+            suggestion = []
+            for venue in venues:
+                if "name" in venue:
+                    suggestion.append(venue["name"])
+            return JsonResponse(suggestion, safe = False)
+        except:
+            return JsonResponse("Error Occured!", safe=False)
