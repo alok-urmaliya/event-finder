@@ -38,3 +38,6 @@ class EventListAPIView(APIView):
         except:
             return JsonResponse('Error Occured while fetching event details! please try again after some time.', safe=False)
         return JsonResponse(event, safe = False)
+    
+    def GetSuggestion(request):
+        return "suggestion API response"

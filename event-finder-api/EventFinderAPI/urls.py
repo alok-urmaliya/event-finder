@@ -6,4 +6,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('events/', EventListAPIView.GetEvents),
     path('eventdetail/', EventListAPIView.GetEventDetail),
+    path('suggest/', EventListAPIView.GetSuggestion)
 ]
