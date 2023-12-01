@@ -20,6 +20,7 @@ const EventDetails = (props: any) => {
         selectedEvent != '' && axios.get('http://127.0.0.1:8000/eventdetail', { params: { "id": selectedEvent } })
             .then(res => res.data)
             .then(res => populateEventDetails(res))
+        setIsFavorite(checkIsFavorite(selectedEvent))
     }, [selectedEvent])
 
     function populateEventDetails(eventJson: any) {
@@ -50,6 +51,12 @@ const EventDetails = (props: any) => {
             eventJson._embedded?.venues[0]?.generalInfo?.childRule || null
         );
         setEventDetail(tempEventDetail)
+    }
+
+    function checkIsFavorite(eventId: string) {
+        const favoriteListString = localStorage.getItem('favoriteList') ?? ""
+        const favoriteList: any[] = JSON.parse(favoriteListString)
+        return favoriteList.some((element) => element.id === eventId);
     }
 
     function handleTabs(e: any, value: any) {
