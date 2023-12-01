@@ -29,17 +29,16 @@ const EventDetails = (props: any) => {
             return (<a href={artist.url ?? ''} target='_blank' className="event-details-item-text event-details-item-artists">{artist.name + ' | '}</a>)
         }))
 
-        const segmentSection = eventJson.classifications[0]?.segment?.name + '|' + eventJson.classifications[0]?.genre?.name + '|' + eventJson.classifications[0]?.subGenre?.name + '|' + eventJson.classifications[0]?.type?.name + '|' + eventJson.classifications[0]?.subType?.name || "Not Provided"
-
+        const segmentSection = eventJson.classifications[0].segment.name + '|' + eventJson.classifications[0].genre.name + '|' + eventJson.classifications[0].subGenre.name + '|' + eventJson.classifications[0].type.name + '|' + eventJson.classifications[0].subType.name
         const tempEventDetail = new EventDetail(
             eventJson.id,
             eventJson.name,
             eventJson.url,
             eventJson.dates?.start?.localDate + ' ' + eventJson.dates?.start?.localTime,
             artists,
-            eventJson._embedded?.venues && eventJson._embedded?.venues?.length > 0 ? eventJson._embedded?.venues[0]?.name : null,
+            eventJson._embedded?.venues ? eventJson._embedded?.venues[0]?.name : null,
             segmentSection,
-            (eventJson.priceRanges[0]?.min + '-' + eventJson.priceRanges[0]?.max) || null,
+            eventJson.priceRanges && (eventJson.priceRanges[0]?.min + '-' + eventJson?.priceRanges[0]?.max),
             eventJson.dates?.status?.code || null,
             eventJson?._embedded?.attractions[0]?.url || '',
             eventJson.seatmap?.staticUrl || null,
@@ -77,30 +76,32 @@ const EventDetails = (props: any) => {
     }
 
     return (
-        <div className="event-details">
-            <button className='event-details--backbutton' onClick={props.handleBackClick}>&lt; <span>back</span></button>
-            <div className="event-details--title">
-                <h2 className="event-details--title--text">
-                    {eventDetail?.name}
-                </h2>
-                <p className="event-details-favorite-icon" onClick={addToFavorites}>
-                    {isFavorite ? <AiFillHeart /> : <AiOutlineHeart />}
-                </p>
+        eventDetail ?
+            <div className="event-details">
+                <button className='event-details--backbutton' onClick={props.handleBackClick}>&lt; <span>back</span></button>
+                <div className="event-details--title">
+                    <h2 className="event-details--title--text">
+                        {eventDetail?.name}
+                    </h2>
+                    <p className="event-details-favorite-icon" onClick={addToFavorites}>
+                        {isFavorite ? <AiFillHeart /> : <AiOutlineHeart />}
+                    </p>
+                </div>
+                <Tabs
+                    value={activeTab}
+                    onChange={handleTabs}
+                    textColor="inherit"
+                    indicatorColor="primary"
+                    className='event-detail-tab-panal'
+                    centered
+                >
+                    <Tab label='Events' />
+                    <Tab label='Venue' />
+                </Tabs>
+                {activeTab === 0 && (<EventTab eventDetail={eventDetail} artistElements={artistElements} />)}
+                {activeTab === 1 && (<VenueTab eventDetail={eventDetail} />)}
             </div>
-            <Tabs
-                value={activeTab}
-                onChange={handleTabs}
-                textColor="inherit"
-                indicatorColor="primary"
-                className='event-detail-tab-panal'
-                centered
-            >
-                <Tab label='Events' />
-                <Tab label='Venue' />
-            </Tabs>
-            {activeTab === 0 && (<EventTab eventDetail={eventDetail} artistElements={artistElements} />)}
-            {activeTab === 1 && (<VenueTab eventDetail={eventDetail} />)}
-        </div>
+            : <div className="loader">Loading...</div>
     )
 }
 

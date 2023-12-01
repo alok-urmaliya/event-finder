@@ -43,10 +43,10 @@ const EventTab: React.FC<EventDataProps> = ({ eventDetail, artistElements }) => 
                     <p className="label-detail">Genres</p>
                     <p className="event-details-item-text">{eventDetail?.genre}</p>
                 </div>
-                <div className="event-details-item">
+                {eventDetail?.priceranges && <div className="event-details-item">
                     <p className="label-detail">Price Ranges</p>
                     <p className="event-details-item-text">{eventDetail?.priceranges} USD</p>
-                </div>
+                </div>}
                 <div className="event-details-item">
                     <p className="label-detail">Ticket Status</p>
                     <TicketStatus ticketstatus={eventDetail?.ticketstatus} />

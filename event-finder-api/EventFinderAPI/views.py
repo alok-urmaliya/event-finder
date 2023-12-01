@@ -50,7 +50,6 @@ class EventListAPIView(APIView):
             responseJson = json.loads(response.content)
             _embedded = responseJson["_embedded"]
             venues = _embedded["venues"]
-            print(venues)
             suggestion = []
             for venue in venues:
                 if "name" in venue:
