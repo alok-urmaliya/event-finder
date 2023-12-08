@@ -25,12 +25,11 @@ const EventDetails = (props: any) => {
 
     function populateEventDetails(eventJson: any) {
         const artists: Artist[] = eventJson?._embedded.attractions?.map((att: any) => ({ name: att.name, url: att.url }))
-
-        setArtistElements(artists?.map(artist => {
-            return (<a href={artist.url ?? ''} target='_blank' className="event-details-item-text event-details-item-artists">{artist.name + ' | '}</a>)
+        setArtistElements(artists.map(artist => {
+            return (<a href={artist.url ?? ''} target='_blank' className="event-details-item-text event-details-item-artists">{artist.name}</a>)
         }))
 
-        const segmentSection = eventJson.classifications[0].segment.name + '|' + eventJson.classifications[0].genre.name + '|' + eventJson.classifications[0].subGenre.name + '|' + eventJson.classifications[0].type.name + '|' + eventJson.classifications[0].subType.name
+        //const segmentSection = eventJson.classifications[0].segment.name + '|' + eventJson.classifications[0].genre.name + '|' + eventJson.classifications[0].subGenre.name + '|' + eventJson.classifications[0].type.name + '|' + eventJson.classifications[0].subType.name
         const tempEventDetail = new EventDetail(
             eventJson.id,
             eventJson.name,
@@ -38,7 +37,7 @@ const EventDetails = (props: any) => {
             eventJson.dates?.start?.localDate + ' ' + eventJson.dates?.start?.localTime,
             artists,
             eventJson._embedded?.venues ? eventJson._embedded?.venues[0]?.name : null,
-            segmentSection,
+            formatClassification(eventJson.classifications[0]),
             eventJson.priceRanges && (eventJson.priceRanges[0]?.min + '-' + eventJson?.priceRanges[0]?.max),
             eventJson.dates?.status?.code || null,
             eventJson?._embedded?.attractions[0]?.url || '',
@@ -52,6 +51,22 @@ const EventDetails = (props: any) => {
         );
         setEventDetail(tempEventDetail)
     }
+
+    const getClassificationValue = (classification: any, propName: any) => {
+        return classification[propName].name !== 'Undefined' ? classification[propName].name : null;
+    };
+
+    const formatClassification = (classification: any) => {
+        const values = [
+            getClassificationValue(classification, 'segment'),
+            getClassificationValue(classification, 'genre'),
+            getClassificationValue(classification, 'subGenre'),
+            getClassificationValue(classification, 'type'),
+            getClassificationValue(classification, 'subType'),
+        ];
+        const filteredValues = values.filter(value => value !== null);
+        return filteredValues.join('|');
+    };
 
     function checkIsFavorite(eventId: string) {
         const favoriteListString = localStorage.getItem('favoriteList') ?? ""
